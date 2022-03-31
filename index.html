@@ -1,0 +1,42 @@
+<html>
+
+<head></head>
+
+<body>
+    <canvas id="myCanvas" width="800" height="600" style="border:1px solid #c3c3c3;"></canvas>
+</body>
+
+<script>
+    const canvas = document.getElementById("myCanvas")
+    const ctx = canvas.getContext("2d")
+
+    ctx.transform(1, 0, 0, -1, 0, canvas.height)
+
+    // Rectangle
+    ctx.fillStyle = "#FF0000"
+    ctx.fillRect(10, 10, 50, 25)
+
+    // Round Rectangle
+    ctx.fillStyle = "#F0F0F0"
+    ctx.roundRect(300, 300, 100, 100, 15)
+
+    // Arc, Circle
+    // context.arc(x,y,r,sAngle,eAngle,counterclockwise)
+    ctx.arc(75, 75, 25, 0, 2 * Math.PI)
+    ctx.fillStyle = "#00FF00"
+    ctx.fill()
+
+    // Polygon
+    ctx.beginPath()
+    ctx.moveTo(100, 100)
+    ctx.lineTo(200, 100)
+    ctx.lineTo(200, 200)
+    ctx.lineTo(150, 250)
+    ctx.lineTo(100, 200)
+    ctx.closePath()
+    ctx.fillStyle = "#0000FF"
+    ctx.fill()
+
+</script>
+
+</html>
