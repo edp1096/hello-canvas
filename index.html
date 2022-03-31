@@ -16,8 +16,8 @@
     const ctx = canvas.getContext("2d")
 
     ctx.transform(1, 0, 0, -1, 0, canvas.height)
-    ctx.fillStyle = "#FF0000"
-    ctx.strokeStyle = "#FF0000"
+    ctx.fillStyle = "#FF0000" // red
+    ctx.strokeStyle = "#FF0000" // red
     // ctx.globalCompositeOperation = 'source-over'
 
     // Line
@@ -32,8 +32,10 @@
     ctx.moveTo(10, 10)
     ctx.rect(10, 10, 50, 25)
     ctx.fill()
+    ctx.closePath()
 
     // Round Rectangle
+    ctx.fillStyle = "#00FF00" // green
     ctx.beginPath()
     ctx.moveTo(300, 300)
     ctx.roundRect(300, 300, 100, 100, 15)
@@ -42,12 +44,14 @@
     // Arc, Circle
     // context.arc(x,y,r,sAngle,eAngle,counterclockwise)
     ctx.beginPath()
+    ctx.fillStyle = "#0000FF" // blue
     ctx.moveTo(275, 75)
     ctx.arc(275, 75, 25, 0, 2 * Math.PI)
     ctx.fill()
 
     // Donut
     // ctx.globalCompositeOperation = 'source-out'
+    ctx.fillStyle = "#AAA" // grey
     ctx.beginPath()
     ctx.moveTo(450, 450)
     ctx.arc(450, 450, 50, 0, 2 * Math.PI)
@@ -61,6 +65,7 @@
     ctx.globalCompositeOperation = 'source-over'
 
     // Polygon
+    ctx.fillStyle = "#FF0000"
     ctx.beginPath()
     ctx.moveTo(100, 100)
     ctx.lineTo(200, 100)
