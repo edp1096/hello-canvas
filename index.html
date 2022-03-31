@@ -1,6 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 
-<head></head>
+<head>
+    <meta charset="utf-8">
+    <title>Hello canvas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
 <body>
     <canvas id="myCanvas" width="800" height="600" style="border:1px solid #c3c3c3;"></canvas>
@@ -11,20 +16,49 @@
     const ctx = canvas.getContext("2d")
 
     ctx.transform(1, 0, 0, -1, 0, canvas.height)
+    ctx.fillStyle = "#FF0000"
+    ctx.strokeStyle = "#FF0000"
+    // ctx.globalCompositeOperation = 'source-over'
+
+    // Line
+    ctx.beginPath()
+    ctx.lineWidth = 10;
+    ctx.moveTo(600, 500)
+    ctx.lineTo(700, 500)
+    ctx.stroke()
 
     // Rectangle
-    ctx.fillStyle = "#FF0000"
-    ctx.fillRect(10, 10, 50, 25)
+    ctx.beginPath()
+    ctx.moveTo(10, 10)
+    ctx.rect(10, 10, 50, 25)
+    ctx.fill()
 
     // Round Rectangle
-    ctx.fillStyle = "#F0F0F0"
+    ctx.beginPath()
+    ctx.moveTo(300, 300)
     ctx.roundRect(300, 300, 100, 100, 15)
+    ctx.fill()
 
     // Arc, Circle
     // context.arc(x,y,r,sAngle,eAngle,counterclockwise)
-    ctx.arc(75, 75, 25, 0, 2 * Math.PI)
-    ctx.fillStyle = "#00FF00"
+    ctx.beginPath()
+    ctx.moveTo(275, 75)
+    ctx.arc(275, 75, 25, 0, 2 * Math.PI)
     ctx.fill()
+
+    // Donut
+    // ctx.globalCompositeOperation = 'source-out'
+    ctx.beginPath()
+    ctx.moveTo(450, 450)
+    ctx.arc(450, 450, 50, 0, 2 * Math.PI)
+    ctx.fill()
+
+    ctx.globalCompositeOperation = 'destination-out'
+    ctx.beginPath()
+    ctx.arc(450, 450, 25, 0, 2 * Math.PI)
+    ctx.closePath()
+    ctx.fill()
+    ctx.globalCompositeOperation = 'source-over'
 
     // Polygon
     ctx.beginPath()
@@ -33,8 +67,6 @@
     ctx.lineTo(200, 200)
     ctx.lineTo(150, 250)
     ctx.lineTo(100, 200)
-    ctx.closePath()
-    ctx.fillStyle = "#0000FF"
     ctx.fill()
 
 </script>
