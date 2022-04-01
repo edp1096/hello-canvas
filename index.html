@@ -12,6 +12,21 @@
 </body>
 
 <script>
+    CanvasRenderingContext2D.prototype.roundRectangle = function (x, y, width, height, radius) {
+        if (width < 2 * radius) radius = width / 2
+        if (height < 2 * radius) radius = height / 2
+
+        this.beginPath()
+        this.moveTo(x + radius, y)
+        this.arcTo(x + width, y, x + width, y + height, radius)
+        this.arcTo(x + width, y + height, x, y + height, radius)
+        this.arcTo(x, y + height, x, y, radius)
+        this.arcTo(x, y, x + width, y, radius)
+        this.closePath()
+
+        return this
+    }
+
     class Layer {
         constructor(canvasID, width, height) {
             this.canvas = document.getElementById("l1")
@@ -32,12 +47,13 @@
         }
 
         Draw() {
-            // this.Line()
-            // this.Rectangle()
-            // this.RoundRectangle()
-            // this.Circle()
-            // this.Donut()
+            this.Line()
+            this.Rectangle()
+            this.RoundRectangle()
+            this.Circle()
+            this.Donut()
             this.Polygon()
+            this.Polygon2()
         }
 
         clear() {
@@ -57,16 +73,14 @@
             this.context.moveTo(10, 10)
             this.context.rect(10, 10, 50, 25)
             this.context.fill()
-            this.context.closePath()
         }
 
         RoundRectangle() {
             this.context.fillStyle = "#00FF00" // green
             this.context.beginPath()
             this.context.moveTo(300, 300)
-            this.context.roundRect(300, 300, 100, 100, 15)
+            this.context.roundRectangle(300, 300, 100, 100, 15)
             this.context.fill()
-            this.context.closePath()
         }
 
         Circle() {
@@ -87,7 +101,7 @@
             this.context.globalCompositeOperation = 'destination-out'
             this.context.beginPath()
             this.context.arc(450, 450, 25, 0, 2 * Math.PI)
-            this.context.closePath()
+            // this.context.closePath()
             this.context.fill()
             this.context.globalCompositeOperation = 'source-over'
         }
@@ -100,6 +114,16 @@
             this.context.lineTo(200, 200)
             this.context.lineTo(150, 250)
             this.context.lineTo(100, 200)
+            this.context.fill()
+        }
+        Polygon2() {
+            this.context.fillStyle = "#FF0000"
+            this.context.beginPath()
+            this.context.moveTo(250, 250)
+            this.context.lineTo(250, 100)
+            this.context.lineTo(250, 250)
+            this.context.lineTo(200, 300)
+            this.context.lineTo(100, 250)
             this.context.fill()
         }
     }
@@ -115,4 +139,5 @@
         padding: 0;
     }
 </style>
+
 </html>
