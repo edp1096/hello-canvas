@@ -8,74 +8,110 @@
 </head>
 
 <body>
-    <canvas id="myCanvas" width="800" height="600" style="border:1px solid #c3c3c3;"></canvas>
+    <canvas id="l1" style="border:1px solid #c3c3c3;"></canvas>
 </body>
 
 <script>
-    const canvas = document.getElementById("myCanvas")
-    const ctx = canvas.getContext("2d")
+    class Layer {
+        constructor(canvasID, width, height) {
+            this.canvas = document.getElementById("l1")
+            this.canvas.width = width
+            this.canvas.height = height
 
-    ctx.transform(1, 0, 0, -1, 0, canvas.height)
+            this.context = this.canvas.getContext("2d")
+            this.context.transform(1, 0, 0, -1, 0, this.canvas.height)
 
-    canvas.style.backgroundColor = '#000000'
-    ctx.fillStyle = "#FF0000" // red
-    ctx.strokeStyle = "#FF0000" // red
-    // ctx.globalCompositeOperation = 'source-over'
+            this.canvas.style.backgroundColor = '#000000'
+            this.context.fillStyle = "#FF0000" // red
+            this.context.strokeStyle = "#FF0000" // red
 
-    // Line
-    ctx.lineWidth = 10
-    ctx.beginPath()
-    ctx.moveTo(600, 500)
-    ctx.lineTo(700, 500)
-    ctx.stroke()
+            this.width = this.canvas.width
+            this.height = this.canvas.height
 
-    // Rectangle
-    ctx.beginPath()
-    ctx.moveTo(10, 10)
-    ctx.rect(10, 10, 50, 25)
-    ctx.fill()
-    ctx.closePath()
+            this.Draw()
+        }
 
-    // Round Rectangle
-    ctx.fillStyle = "#00FF00" // green
-    ctx.beginPath()
-    ctx.moveTo(300, 300)
-    ctx.roundRect(300, 300, 100, 100, 15)
-    ctx.fill()
+        Draw() {
+            this.Line()
+            this.Rectangle()
+            this.RoundRectangle()
+            this.Circle()
+            this.Donut()
+            this.Polygon()
+        }
 
-    // Arc, Circle
-    // context.arc(x,y,r,sAngle,eAngle,counterclockwise)
-    ctx.beginPath()
-    ctx.fillStyle = "#0000FF" // blue
-    ctx.moveTo(275, 75)
-    ctx.arc(275, 75, 25, 0, 2 * Math.PI)
-    ctx.fill()
+        clear() {
+            this.context.clearRect(0, 0, this.width, this.height)
+        }
 
-    // Donut
-    // ctx.globalCompositeOperation = 'source-out'
-    ctx.fillStyle = "#AAA" // grey
-    ctx.beginPath()
-    ctx.moveTo(450, 450)
-    ctx.arc(450, 450, 50, 0, 2 * Math.PI)
-    ctx.fill()
+        Line() {
+            this.context.lineWidth = 10
+            this.context.beginPath()
+            this.context.moveTo(600, 500)
+            this.context.lineTo(700, 500)
+            this.context.stroke()
+        }
 
-    ctx.globalCompositeOperation = 'destination-out'
-    ctx.beginPath()
-    ctx.arc(450, 450, 25, 0, 2 * Math.PI)
-    ctx.closePath()
-    ctx.fill()
-    ctx.globalCompositeOperation = 'source-over'
+        Rectangle() {
+            this.context.beginPath()
+            this.context.moveTo(10, 10)
+            this.context.rect(10, 10, 50, 25)
+            this.context.fill()
+            this.context.closePath()
+        }
 
-    // Polygon
-    ctx.fillStyle = "#FF0000"
-    ctx.beginPath()
-    ctx.moveTo(100, 100)
-    ctx.lineTo(200, 100)
-    ctx.lineTo(200, 200)
-    ctx.lineTo(150, 250)
-    ctx.lineTo(100, 200)
-    ctx.fill()
+        RoundRectangle() {
+            this.context.fillStyle = "#00FF00" // green
+            this.context.beginPath()
+            this.context.moveTo(300, 300)
+            this.context.roundRect(300, 300, 100, 100, 15)
+            this.context.fill()
+        }
 
+        Circle() {
+            this.context.beginPath()
+            this.context.fillStyle = "#0000FF" // blue
+            this.context.moveTo(275, 75)
+            this.context.arc(275, 75, 25, 0, 2 * Math.PI)
+            this.context.fill()
+        }
+
+        Donut() {
+            this.context.fillStyle = "#AAA" // grey
+            this.context.beginPath()
+            this.context.moveTo(450, 450)
+            this.context.arc(450, 450, 50, 0, 2 * Math.PI)
+            this.context.fill()
+
+            this.context.globalCompositeOperation = 'destination-out'
+            this.context.beginPath()
+            this.context.arc(450, 450, 25, 0, 2 * Math.PI)
+            this.context.closePath()
+            this.context.fill()
+            this.context.globalCompositeOperation = 'source-over'
+        }
+
+        Polygon() {
+            this.context.fillStyle = "#FF0000"
+            this.context.beginPath()
+            this.context.moveTo(100, 100)
+            this.context.lineTo(200, 100)
+            this.context.lineTo(200, 200)
+            this.context.lineTo(150, 250)
+            this.context.lineTo(100, 200)
+            this.context.fill()
+        }
+    }
 </script>
 
+<script>
+    const layer1 = new Layer("l1", 1024, 768)
+</script>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+</style>
 </html>
